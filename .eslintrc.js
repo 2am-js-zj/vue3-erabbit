@@ -1,4 +1,5 @@
 module.exports = {
+
   root: true,
   env: {
     node: true
@@ -14,9 +15,10 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     "vue/multi-word-component-names": [
+
       "error",
       {
-        ignores: ["根模块的vuex使用用法", "Layout"], //需要忽略的组件名
+        ignores: ["根模块的vuex使用用法", "Layout", "index"], //需要忽略的组件名
       },
     ],
   }

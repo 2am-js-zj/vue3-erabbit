@@ -1,55 +1,29 @@
 import { createStore } from 'vuex'
+import createPersistedstate from 'vuex-persistedstate'
+
+// 独立的三个模块
+import cart from './modules/cart'
+import category from './modules/category'
+import user from './modules/user'
 
 
-// A模块
-const moduleA = {
-  state: {
-    username: 'moduleA'
-  },
-  getters: {
-    newName(state) {
-      return state.username + "!!!"
-    }
-  },
-  mutations: {
-    updateName(state) {
-      state.username = 'lslsls'
-    }
-  },
 
-}
-// B模块
-const moduleB = {
-  namespaced: true,
-  state: {
-    username: 'moduleB'
-  },
-  getters: {
-    newName(state) {
-      return state.username + "!!!"
-    }
-  },
-  mutations: {
-    updateName(state) {
-      state.username = 'ls'
-    }
-  },
-  actions: {
-    updateName(context) {
-      //做异步操作
-      setTimeout(() => {
-        context.commit('updateName')
-      }, 1000);
-    }
-  },
-
-}
 
 export default createStore({
   modules: {
-    moduleA,
-    moduleB
-  }
+    cart,
+    category,
+    user,
+  },
+  plugins: [
+    // 默认存储在localstorage
+    createPersistedstate({
+      // 本地存储 key 名字
+      key: 'erabbit-client-pc-store',
+      // 指定需要本地存储的模块
+      paths: ['user', 'cart']
+    })
+  ]
 })
 
 
